@@ -1,0 +1,35 @@
+<% include header %>
+
+<h1>Account</h1>
+
+<div class="row actions">
+<a class="btn btn-info" href="/account">Accounts</a>
+<a class="btn btn-info" href="/account/<%= account.publicKey %>/tx">Transactions</a>
+<a class="btn btn-info" href="/account/<%= account.publicKey %>/transfer">Transfer</a>
+<a class="btn btn-info" href="/account/<%= account.publicKey %>/btctransfer">Transfer to BTC</a>
+</div>
+
+<div class="row">
+    <table class="table-bordered">
+        <tr>
+            <td>Name</td>
+            <td><%= account.name %></td>           
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><%= account.publicKey %></td>
+        </tr>
+        <tr>
+            <td>Private Key</td>
+            <td><%= account.privateKey %></td>
+        </tr>
+        <tr>
+            <td>Balance</td>
+            <td><%= account.balance %></td>
+        </tr>
+    
+    </table>
+</div>
+
+
+<% include footer %>

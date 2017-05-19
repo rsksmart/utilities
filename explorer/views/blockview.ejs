@@ -1,0 +1,49 @@
+<% include header %>
+
+<h1>Block</h1>
+
+<div class="row actions">
+<a class="btn btn-info" href="/block">Blocks</a>
+<% if (block.parentHash) { %>
+<a class="btn btn-info" href="/block/<%= block.parentHash %>">Parent</a>
+<% } %>
+</div>
+
+<div class="row">
+    <table class="table-bordered">
+<% for (n in block) {
+    if (n === 'transactions') { %>
+        <tr>
+            <td><%= n %></td>
+            <td>
+            <% for (nt in block[n]) { %>
+                <a href="/transaction/<%= block[n][nt] %>"><%= block[n][nt] %></a>
+            <% } %>
+            </td>
+        </tr>
+    <% } else if (n === 'uncles') { %>
+        <tr>
+            <td><%= n %></td>
+            <td>
+            <% for (nu in block[n]) { %>
+                <a href="/block/<%= block[n][nu] %>"><%= block[n][nu] %></a>
+            <% } %>
+            </td>
+        </tr>
+    <% } else if (n === 'miner') { %>
+        <tr>
+            <td><%= n %></td>
+            <td><a href='/account/<%= block[n] %>'><%= block[n] %></a></td>
+        </tr>
+    <% } else { %>
+        <tr>
+            <td><%= n %></td>
+            <td><%= block[n] %></td>
+        </tr>
+<% } 
+} %>
+    </table>
+</div>
+
+<% include footer %>
+

@@ -1,0 +1,15 @@
+<% include header %>
+<h1>Current Host</h1>
+
+<div class='row'>
+<form method="post" role="form" class="form">
+    <div class="form-group">
+        <label for="host">Host</label>
+        <input type="text" class="form-control" name="host" id="host" value="<%= host %>">
+    </div>
+    
+    <input class="btn btn-primary" type="submit" value="Change" />
+</form>
+</div>
+
+<% include footer %>

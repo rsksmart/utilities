@@ -1,0 +1,35 @@
+<% include header %>
+
+<h1>Asset</h1>
+
+<div class="row actions">
+<a class="btn btn-info" href="/asset">Assets</a>
+<%
+    if (asset.address) {
+%>
+<a class="btn btn-info" href="/asset/<%= asset.id %>/balance">Balances</a>
+<a class="btn btn-primary" href="/asset/<%= asset.id %>/transfer">Transfer</a>
+<%
+    }
+%>
+</div>
+
+<div class="row">
+    <table class="table-bordered">
+        <tr>
+            <td>Name</td>
+            <td><%= asset.name %></td>
+        </tr>
+        <tr>
+            <td>Notes</td>
+            <td><%= asset.notes %></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><%= asset.address %></td>
+        </tr>
+    </table>
+</div>
+
+<% include footer %>
+

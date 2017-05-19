@@ -1,0 +1,27 @@
+<% include header %>
+
+<h1>Transaction</h1>
+
+<div class="row actions">
+<a class="btn btn-info" href="/block">Blocks</a>
+</div>
+
+<div class="row">
+    <table class="table-bordered">
+<% for (n in transaction) { %>
+        <tr>
+            <td><%= n %></td>
+            <% if (n === 'from' || n === 'to') { %>
+            <td><a href='/account/<%= transaction[n] %>'><%= transaction[n] %></a></td>
+            <% } else if (n === 'blockHash') { %>
+            <td><a href='/block/<%= transaction[n] %>'><%= transaction[n] %></a></td>
+            <% } else { %>
+            <td><%= transaction[n] %></td>
+            <% } %>
+        </tr>
+<% } %>
+    </table>
+</div>
+
+<% include footer %>
+

@@ -1,0 +1,27 @@
+<% include header %>
+<h1>Accounts</h1>
+
+<div class="row actions">
+<a class="btn btn-primary" href="/account/new">New Account</a>
+</div>
+
+<div class="row">
+    <table class="table-striped table-bordered">
+        <tr>
+            <th>&nbsp;</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Private Key</th>
+        </tr>
+    <% accounts.forEach(function (account) { %>
+        <tr>
+            <td><a href="/account/<%= account.id %>">View</a></td>
+            <td><%= account.name %></td>
+            <td><%= account.publicKey %></td>
+            <td><%= account.privateKey %></td>
+        </tr>
+    <% }); %>
+    </table>
+</div>
+    
+<% include footer %>

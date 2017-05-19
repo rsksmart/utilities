@@ -1,0 +1,49 @@
+{
+    "steps": [
+        {
+            "type": "contract",
+            "source": "incr.solc",
+            "name": "counter"
+        },
+        
+        {
+            "type": "event",
+            "contract": "counter",
+            "method": "Incremented",
+            "filter": { "odd": true }
+        },
+                
+        {
+            "type": "invoke",
+            "contract": "counter",
+            "method": "inc",
+            "arguments": [],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826"            
+        },
+                
+        {
+            "type": "invoke",
+            "contract": "counter",
+            "method": "inc",
+            "arguments": [],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826"            
+        },
+                
+        {
+            "type": "invoke",
+            "contract": "counter",
+            "method": "inc",
+            "arguments": [],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826"            
+        },
+                
+        {
+            "type": "call",
+            "contract": "counter",
+            "method": "getValue",
+            "arguments": [],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826"            
+        }
+    ]
+}
+

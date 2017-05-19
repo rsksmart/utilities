@@ -1,0 +1,140 @@
+{
+    "steps": [
+        {
+            "type": "balance",
+            "account": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826"
+        },
+        
+        {
+            "type": "contractx",
+            "source": "greetery.sol",
+            "name": "greeter",
+            "arguments": ["Hello, Contract"],
+			"gas": 1200000
+        },
+
+        {
+            "type": "balance",
+            "account": "greeter",
+            "expected": 0
+        },
+        
+        {
+            "type": "call",
+            "contract": "greeter",
+            "method": "greet",
+            "arguments": [],
+            "expected": "Hello, Contract"
+        },
+        
+        {
+            "type": "invoke",
+            "contract": "greeter",
+            "method": "setMessage",
+            "arguments": ["Hello, Greeter"],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
+			"value": 5000
+        },
+
+        {
+            "type": "balance",
+            "account": "greeter",
+            "expected": 5000
+        },
+        
+        {
+            "type": "call",
+            "contract": "greeter",
+            "method": "greet",
+            "arguments": [],
+            "expected": "Hello, Greeter"
+        },
+        
+        {
+            "type": "invoke",
+            "contract": "greeter",
+            "method": "setMessage",
+            "arguments": ["Hello, Greeter 2"],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
+			"value": 5000
+        },
+
+        {
+            "type": "balance",
+            "account": "greeter",
+            "expected": 10000
+        },
+        
+        {
+            "type": "call",
+            "contract": "greeter",
+            "method": "greet",
+            "arguments": [],
+            "expected": "Hello, Greeter 2"
+        },
+		
+        {
+			"comment": "raise throw in method",
+            "type": "invoke",
+            "contract": "greeter",
+            "method": "raiseException",
+            "arguments": [],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
+			"value": 5000,
+			"gas": 1200000
+        },
+
+        {
+            "type": "balance",
+            "account": "greeter",
+            "expected": 10000
+        },
+        
+        {
+            "type": "balance",
+            "account": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826"
+        },
+        
+        {
+			"comment": "not enough gas",
+            "type": "invoke",
+            "contract": "greeter",
+            "method": "setMessage",
+            "arguments": ["Hello, Greeter 3"],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
+			"value": 5000,
+			"gas": 25000
+        },
+
+        {
+            "type": "balance",
+            "account": "greeter",
+            "expected": 10000
+        },
+        
+        {
+            "type": "call",
+            "contract": "greeter",
+            "method": "greet",
+            "arguments": [],
+            "expected": "Hello, Greeter 2"
+        },
+		
+        {
+			"comment": "raise throw in other contract",
+            "type": "invoke",
+            "contract": "greeter",
+            "method": "otherException",
+            "arguments": [],
+            "from": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
+			"value": 5000
+        },
+
+        {
+            "type": "balance",
+            "account": "greeter",
+            "expected": 10000
+        }
+    ]
+}
+

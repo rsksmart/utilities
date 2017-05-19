@@ -1,0 +1,44 @@
+<% include header %>
+<h1>Asset Transfer</h1>
+
+<div class="row actions">
+<a class="btn btn-info btn-sm" href="/asset">Assets</a>
+<a class="btn btn-info" href="/asset/<%= asset.id %>">Asset</a>
+</div>
+
+<div class='row'>
+<form method="post" role="form" class="form">
+    <div class="form-group">
+        <label for="from">From Account</label>
+        <select class="form-control" name="from" id="from">
+<% accounts.forEach(function (account) { %>
+            <option value="<%= account.id %>"><%= account.name %></option>
+<% }); %>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="to">To Account</label>
+        <select class="form-control" name="to" id="to">
+<% accounts.forEach(function (account) { %>
+            <option value="<%= account.id %>"><%= account.name %></option>
+<% }); %>
+        </select>
+    </div>        
+
+    <div class="form-group">
+        <div class="col-xs-4">
+            <label for="amount">Amount</label>
+        </div>
+        <div class="row">
+        <div class="col-xs-4">
+            <input type="text" patter="\d*" class="form-control" name="amount" id="amount">
+        </div>
+        </div>
+    </div>
+    
+    <input class="btn btn-primary" type="submit" value="Send" />
+</form>
+</div>
+
+<% include footer %>
+

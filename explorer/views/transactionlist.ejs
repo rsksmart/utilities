@@ -1,0 +1,25 @@
+<% include header %>
+<h1>Transactions</h1>
+
+<div class="row">
+    <table class="table-striped table-bordered">
+        <tr>
+            <th>&nbsp;</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Value</th>
+            <th>Block Number</th>
+        </tr>
+    <% transactions.forEach(function (tx) { %>
+        <tr>
+            <td><a href="/transaction/<%= tx.hash %>">View</a></td>
+            <td><a href="/account/<%= tx.from %>"><%= tx.from %></a></td>
+            <td><a href="/account/<%= tx.to %>"><%= tx.to %></a></td>
+            <td><%= tx.value %></td>
+            <td><%= tx.blockNumber %></td>
+        </tr>
+    <% }); %>
+    </table>
+</div>
+    
+<% include footer %>

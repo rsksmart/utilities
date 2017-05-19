@@ -1,0 +1,23 @@
+<% include header %>
+<h1>New Asset</h1>
+
+<div class="row actions">
+<a class="btn btn-info" href="/asset">Assets</a>
+</div>
+
+<div class='row'>
+<form method="post" role="form" class="form">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" id="name">
+    </div>
+    <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea class="form-control" name="notes" id="notes"></textarea>
+    </div>        
+    
+    <input class="btn btn-primary" type="submit" value="Create" />
+</form>
+</div>
+
+<% include footer %>

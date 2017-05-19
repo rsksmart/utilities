@@ -1,0 +1,24 @@
+{
+  "name": "tokenapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "simpleunit test -r"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.3",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0",
+    "solc": "^0.1.6",
+    "web3": "^0.15.3"
+  },
+  "devDependencies": {
+    "simplelists": "0.0.6",
+    "simpleunit": "0.0.7"
+  }
+}
