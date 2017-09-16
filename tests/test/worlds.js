@@ -8,3 +8,9 @@ exports['create world'] = function (test) {
 	test.equal(typeof world, 'object');
 };
 
+exports['get undefined variable'] = function (test) {
+	var world = worlds.world();
+	
+	test.equal(world.variable('foo'), null);
+};
+

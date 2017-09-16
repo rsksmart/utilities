@@ -1,6 +1,6 @@
 
 function World() {
-	
+	this.variable = function () {};
 }
 
 function createWorld() {
