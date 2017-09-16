@@ -33,3 +33,13 @@ exports['set and get account'] = function (test) {
 	world.account('account', 42);
 	test.equal(world.account('account'), 42);
 };
+
+exports['set and get server'] = function (test) {
+	var world = worlds.world();
+	
+	var server = {};
+	
+	world.server(server);
+	test.strictEqual(world.server(), server);
+};
+
