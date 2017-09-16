@@ -1,0 +1,18 @@
+{
+  "name": "tests",
+  "private": true,
+  "version": "1.0.0",
+  "description": "RSK node tests",
+  "main": "console.js",
+  "scripts": {
+    "test": "simpleunit test"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "simpleargs": "0.0.3"
+  },
+  "devDependencies": {
+    "simpleunit": "0.0.7"
+  }
+}
