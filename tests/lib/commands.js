@@ -1,12 +1,12 @@
 
 function TransferCommand(cmd, world) {
-	this.execute = function (txdata, cb) {
+	this.execute = function (cb) {
 		var data = {
-			from: txdata.from,
-			to: txdata.to,
-			value: txdata.value,
-			gasPrice: 1,
-			gas: 21000
+			from: cmd.from,
+			to: cmd.to,
+			value: cmd.value,
+			gasPrice: cmd.gasPrice || 1,
+			gas: cmd.gas || 21000
 		};
 		
 		world.server().sendTransfer(data, cb);
