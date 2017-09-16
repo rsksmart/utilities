@@ -1,6 +1,13 @@
 
 function World() {
-	this.variable = function () {};
+	var variables = {};
+	
+	this.variable = function (name, value) {
+		if (value === undefined)
+			return variables[name];
+		
+		variables[name] = value;
+	};
 }
 
 function createWorld() {
