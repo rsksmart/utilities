@@ -20,3 +20,16 @@ exports['set and get variable'] = function (test) {
 	world.variable('answer', 42);
 	test.equal(world.variable('answer'), 42);
 };
+
+exports['get undefined account'] = function (test) {
+	var world = worlds.world();
+	
+	test.equal(world.account('foo'), null);
+};
+
+exports['set and get account'] = function (test) {
+	var world = worlds.world();
+	
+	world.account('account', 42);
+	test.equal(world.account('account'), 42);
+};
