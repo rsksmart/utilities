@@ -12,6 +12,7 @@ exports['execute transfer command'] = function (test) {
 	test.async();
 	
 	var world = worlds.world();
+	var invoked = false;
 	
 	var server = {
 		sendTransfer: function (data, cb) {
@@ -21,6 +22,8 @@ exports['execute transfer command'] = function (test) {
 			test.equal(data.value, 100000);
 			test.equal(data.gasPrice, 1);
 			test.equal(data.gas, 21000);
+			
+			invoked = true;
 			
 			cb(null, null);
 		}
@@ -41,6 +44,7 @@ exports['execute transfer command'] = function (test) {
 	
 	cmd.execute(function (err, data) {
 		test.equal(err, null);
+		test.ok(invoked);
 		test.done();
 	});
 };
@@ -49,6 +53,7 @@ exports['execute transfer command with custom gas price and gas'] = function (te
 	test.async();
 	
 	var world = worlds.world();
+	var invoked = false;
 	
 	var server = {
 		sendTransfer: function (data, cb) {
@@ -58,6 +63,8 @@ exports['execute transfer command with custom gas price and gas'] = function (te
 			test.equal(data.value, txcmd.value);
 			test.equal(data.gasPrice, txcmd.gasPrice);
 			test.equal(data.gas, txcmd.gas);
+			
+			invoked = true;
 			
 			cb(null, null);
 		}
@@ -80,6 +87,7 @@ exports['execute transfer command with custom gas price and gas'] = function (te
 	
 	cmd.execute(function (err, data) {
 		test.equal(err, null);
+		test.ok(invoked);
 		test.done();
 	});
 };
