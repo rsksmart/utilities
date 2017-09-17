@@ -25,6 +25,11 @@ function World() {
 		else
 			return server;
 	}
+	
+	this.evaluate = function (expr) {
+		with (variables)
+			return eval(expr);
+	}
 }
 
 function createWorld() {

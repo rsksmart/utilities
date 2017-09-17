@@ -21,6 +21,13 @@ exports['set and get variable'] = function (test) {
 	test.equal(world.variable('answer'), 42);
 };
 
+exports['evaluate expression referencing variable'] = function (test) {
+	var world = worlds.world();
+	
+	world.variable('answer', 42);
+	test.equal(world.evaluate('answer === 42'), true);
+};
+
 exports['get undefined account'] = function (test) {
 	var world = worlds.world();
 	
