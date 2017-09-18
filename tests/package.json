@@ -12,7 +12,8 @@
   "dependencies": {
     "rskapi": "0.0.1",
     "simpleargs": "0.0.3",
-    "simpleasync": "0.0.8"
+    "simpleasync": "0.0.8",
+    "solc": "^0.4.16"
   },
   "devDependencies": {
     "simpleunit": "0.0.7"
