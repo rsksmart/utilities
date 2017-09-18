@@ -22,8 +22,7 @@ contract greeter is mortal {
         greeting = g;
     }
 
-    /* main function */
-    function greet() constant returns (string) {
+    function getMessage() constant returns (string) {
         return greeting;
     }
 }

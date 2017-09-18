@@ -20,7 +20,7 @@ function sendTransaction(host, from, to, value, options, cb) {
 		txdata.to = to;
 	
 	if (options.data)
-		txdata = options.data;
+		txdata.data = options.data;
 	
 	host.sendTransaction(txdata, cb);
 }
@@ -85,7 +85,7 @@ function createContract(host, from, value, code, options, cb) {
 	options.data = code;
 	
 	if (!options.gas)
-		options.gas = 300000;
+		options.gas = 3000000;
 
 	var txhash;
 	

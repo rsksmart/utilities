@@ -15,29 +15,9 @@ var argv = sargs(process.argv.slice(2));
 
 var host = rskapi.host(argv.host);
 
-function sendTransactions(counter, cb) {
-	if (counter <= 0)
-		return cb(null, null);
-		
-	async()
-		.exec(function (next) {
-			cmds.processTransaction(host, argv.from, target, 100000, next);
-		})
-		.then(function (data, next) {
-			setTimeout(function () {
-				sendTransactions(counter - 1, cb);
-			}, 0);
-		})
-		.error(function(err) {
-			cb(err);
-		});
-}
-
-var target;
-
 async()
 	.exec(function (next) {
-		cmds.createContract(host, argv.from, target, 100000, contract.runtimeBytecode, next);
+		cmds.createContract(host, argv.from, 0, contract.bytecode, next);
 	})
 	.then(function (data, next) {
 		console.log('new contract', data);
