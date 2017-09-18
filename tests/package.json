@@ -10,7 +10,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "simpleargs": "0.0.3"
+    "rskapi": "0.0.1",
+    "simpleargs": "0.0.3",
+    "simpleasync": "0.0.8"
   },
   "devDependencies": {
     "simpleunit": "0.0.7"
