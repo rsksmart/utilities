@@ -22,9 +22,31 @@ function sendTransaction(host, from, to, value, options, cb) {
 	if (options.data)
 		txdata.data = options.data;
 
-	console.dir(txdata);
-	
 	host.sendTransaction(txdata, cb);
+}
+
+function callTransaction(host, from, to, value, options, cb) {
+	if (!cb) {
+		cb = options;
+		options = {};
+	}
+	
+	options = options || {};
+	
+	var txdata = {
+		from: from,
+		value: value,
+		gas: options.gas || 21000,
+		gasPrice: options.gasPrice || 1
+	};
+	
+	if (to)
+		txdata.to = to;
+	
+	if (options.data)
+		txdata.data = options.data;
+
+	host.callTransaction(txdata, cb);
 }
 
 function getTransactionReceipt(host, hash, ntry, cb) {
@@ -122,6 +144,7 @@ module.exports = {
 	createAccount: createAccount,
 	createContract: createContract,
 	processTransaction: processTransaction,
+	callTransaction: callTransaction,
 	getBalance: getBalance
 };
 
