@@ -21,6 +21,8 @@ function sendTransaction(host, from, to, value, options, cb) {
 	
 	if (options.data)
 		txdata.data = options.data;
+
+	console.dir(txdata);
 	
 	host.sendTransaction(txdata, cb);
 }
