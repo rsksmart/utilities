@@ -26,6 +26,13 @@ async()
 	})
 	.then(function (data, next) {
 		console.log('value', contracts.decodeValue(data));
+		cmds.processTransaction(host, argv.from, contract.address, 0, { gas: 1000000, data: contracts.encodeCall(contract, 'setMessage(string)', [ 'Hello, world' ]) }, next);
+	})
+	.then(function (data, next) {
+		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getMessage()', []) }, next);
+	})
+	.then(function (data, next) {
+		console.log('value', contracts.decodeValue(data));
 	})
 	.error(function (err) {
 		console.log(err);

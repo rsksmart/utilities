@@ -18,7 +18,7 @@ function compileContract(name, filename) {
 	return output.contracts[name];
 }
 
-function encodeArgument(arg) {
+function encodeIntegerArgument(arg) {
 	var encoded = arg.toString(16);
 	
 	if (arg < 0)
@@ -31,14 +31,52 @@ function encodeArgument(arg) {
 	return encoded;
 }
 
-function encodeArguments(args) {
-	var result = '';
+function fillTo64(str) {
+	if (str.length % 1)
+		str += '0';
 	
-	args.forEach(function (arg) {
-		result += encodeArgument(arg);
-	});
+	while (str.length % 64)
+		str += '00';
+	
+	return str;
+}
+
+function stringToHex(str) {
+	var hex = Buffer.from(str).toString('hex');
+	
+	if (hex.length % 1)
+		hex = '0' + hex;
+	
+	return hex;
+}
+
+function encodeStringArgument(arg, ending) {
+	var result = [];
+	
+	result.push(encodeIntegerArgument(ending));
+	
+	var encoded = encodeIntegerArgument(arg.length) + fillTo64(stringToHex(arg));
+	
+	result.push(encoded);
 	
 	return result;
+}
+
+function encodeArguments(args) {
+	var result = '';
+	var varresult = '';
+	
+	args.forEach(function (arg) {
+		if (typeof arg === 'string') {
+			var encoded = encodeStringArgument(arg, args.length * 32 + varresult.length / 2);
+			result += encoded[0];
+			varresult += encoded[1];
+		}
+		else
+			result += encodeIntegerArgument(arg);
+	});
+	
+	return result + varresult;
 }
 
 function hexToString(hex) {
