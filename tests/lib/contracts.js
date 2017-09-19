@@ -41,7 +41,27 @@ function encodeArguments(args) {
 	return result;
 }
 
+function hexToString(hex) {
+	console.log('hex', hex);
+	var str = '';
+	
+	for (var k = 0; k < hex.length; k += 2)
+		str += String.fromCharCode(parseInt(hex.substring(k, k + 2), 16));
+	
+	return str;
+}
+
 function decodeValue(encoded) {
+	if (encoded.substring(0,2) === '0x')
+		encoded = encoded.substring(2);
+	
+	if (encoded.length > 64) {
+		var position = decodeValue(encoded.substring(0, 64)) * 2;
+		var length = decodeValue(encoded.substring(position, position + 64)) * 2;
+		
+		return hexToString(encoded.substring(position + 64, position + 64 + length));
+	}
+
 	return parseInt(encoded, 16);
 }
 
