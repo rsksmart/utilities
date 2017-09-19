@@ -18,6 +18,29 @@ function compileContract(name, filename) {
 	return output.contracts[name];
 }
 
-module.exports = {
-	compile: compileContract
+function encodeArgument(arg) {
+	var encoded = arg.toString(16);
+	
+	if (arg < 0)
+		while (encoded.length < 64)
+			encoded = 'f' + encoded;
+	else
+		while (encoded.length < 64)
+			encoded = '0' + encoded;
 }
+
+function encodeArguments(args) {
+	var result = '';
+	
+	args.forEach(function (arg) {
+		result += encodeArgument(arg);
+	});
+	
+	return result;
+}
+
+module.exports = {
+	compile: compileContract,
+	encodeArguments: encodeArguments
+}
+
