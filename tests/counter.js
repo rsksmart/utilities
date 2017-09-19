@@ -22,14 +22,21 @@ async()
 	.then(function (data, next) {
 		contract.address = data;
 		console.log('new contract', contract.address);
-		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contract.functionHashes['getValue()'] }, next);
+		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getValue()', []) }, next);
 	})
 	.then(function (data, next) {
 		console.log('value', contracts.decodeValue(data));
-		cmds.processTransaction(host, argv.from, contract.address, 0, { gas: 2000000, data: contract.functionHashes['increment()'] }, next);
+		cmds.processTransaction(host, argv.from, contract.address, 0, { gas: 2000000, data: contracts.encodeCall(contract, 'increment()', []) }, next);
 	})
 	.then(function (data, next) {
-		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contract.functionHashes['getValue()'] }, next);
+		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getValue()', []) }, next);
+	})
+	.then(function (data, next) {
+		console.log('value', contracts.decodeValue(data));
+		cmds.processTransaction(host, argv.from, contract.address, 0, { gas: 2000000, data: contracts.encodeCall(contract, 'add(uint256)', [ 10 ]) }, next);
+	})
+	.then(function (data, next) {
+		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getValue()', []) }, next);
 	})
 	.then(function (data, next) {
 		console.log('value', contracts.decodeValue(data));

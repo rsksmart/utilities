@@ -21,7 +21,7 @@ function sendTransaction(host, from, to, value, options, cb) {
 	
 	if (options.data)
 		txdata.data = options.data;
-
+	
 	host.sendTransaction(txdata, cb);
 }
 

@@ -27,6 +27,8 @@ function encodeArgument(arg) {
 	else
 		while (encoded.length < 64)
 			encoded = '0' + encoded;
+		
+	return encoded;
 }
 
 function encodeArguments(args) {
@@ -57,11 +59,17 @@ function decodeValues(encoded) {
 	return value;
 }
 
+function encodeCall(contract, fnsignature, args) {
+	return contract.functionHashes[fnsignature] + encodeArguments(args);
+}
+
 module.exports = {
 	compile: compileContract,
 	encodeArguments: encodeArguments,
 
 	decodeValue: decodeValue,
-	decodeValues: decodeValues
+	decodeValues: decodeValues,
+	
+	encodeCall: encodeCall
 }
 
