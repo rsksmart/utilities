@@ -39,8 +39,29 @@ function encodeArguments(args) {
 	return result;
 }
 
+function decodeValue(encoded) {
+	return parseInt(encoded, 16);
+}
+
+function decodeValues(encoded) {
+	if (encoded.substring(0,2) === '0x')
+		encoded = encoded.substring(2);
+	
+	var values = [];
+	
+	while (encoded.length >= 64) {
+		args.push(decodeValue(encoded.substring(0, 64)));
+		encoded = encoded.substring(64);
+	}
+	
+	return value;
+}
+
 module.exports = {
 	compile: compileContract,
-	encodeArguments: encodeArguments
+	encodeArguments: encodeArguments,
+
+	decodeValue: decodeValue,
+	decodeValues: decodeValues
 }
 

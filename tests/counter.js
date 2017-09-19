@@ -25,14 +25,14 @@ async()
 		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contract.functionHashes['getValue()'] }, next);
 	})
 	.then(function (data, next) {
-		console.log('value', data);
+		console.log('value', contracts.decodeValue(data));
 		cmds.processTransaction(host, argv.from, contract.address, 0, { gas: 2000000, data: contract.functionHashes['increment()'] }, next);
 	})
 	.then(function (data, next) {
 		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contract.functionHashes['getValue()'] }, next);
 	})
 	.then(function (data, next) {
-		console.log('value', data);
+		console.log('value', contracts.decodeValue(data));
 	})
 	.error(function (err) {
 		console.log(err);
