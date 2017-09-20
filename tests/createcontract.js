@@ -1,9 +1,10 @@
 
 var rskapi = require('rskapi');
-var cmds = require('./lib/cmds');
 var sargs = require('simpleargs');
 var async = require('simpleasync');
+
 var contracts = require('./lib/contracts');
+var commands = require('./lib/commands');
 
 var contract = contracts.compile('greeter.sol:greeter', 'greeter.sol');
 
@@ -17,7 +18,7 @@ var host = rskapi.host(argv.host);
 
 async()
 	.exec(function (next) {
-		cmds.createContract(host, argv.from, 0, contract.bytecode, next);
+		commands.createContract(host, argv.from, 0, contract.bytecode, next);
 	})
 	.then(function (data, next) {
 		console.log('new contract', data);

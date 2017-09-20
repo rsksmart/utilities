@@ -3,7 +3,7 @@ var rskapi = require('rskapi');
 var sargs = require('simpleargs');
 var async = require('simpleasync');
 
-var cmds = require('./lib/cmds');
+var commands = require('./lib/commands');
 var utils = require('./lib/utils');
 
 sargs
@@ -16,14 +16,14 @@ var argv = sargs(process.argv.slice(2));
 var host = rskapi.host(argv.host);
 
 function sendTransaction(cb) {
-	cmds.processTransaction(host, argv.from, target, 100000, cb);
+	commands.processTransaction(host, argv.from, target, 100000, cb);
 }
 
 var target;
 
 async()
 	.exec(function (next) {
-		cmds.createAccount(host, next);
+		commands.createAccount(host, next);
 	})
 	.then(function (data, next) {
 		target = data;
@@ -31,7 +31,7 @@ async()
 		utils.repeat(sendTransaction, argv.count, next);
 	})
 	.then(function (data, next) {
-		cmds.getBalance(host, target, next);
+		commands.getBalance(host, target, next);
 	})
 	.then(function (data, next) {
 		console.log('account balance', parseInt(data, 16));

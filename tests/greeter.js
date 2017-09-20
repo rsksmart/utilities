@@ -1,9 +1,10 @@
 
 var rskapi = require('rskapi');
-var cmds = require('./lib/cmds');
 var sargs = require('simpleargs');
 var async = require('simpleasync');
+
 var contracts = require('./lib/contracts');
+var commands = require('./lib/commands');
 
 var contract = contracts.compile('greeter.sol:greeter', 'greeter.sol');
 
@@ -17,19 +18,19 @@ var host = rskapi.host(argv.host);
 
 async()
 	.exec(function (next) {
-		cmds.createContract(host, argv.from, 0, contract.bytecode, next);
+		commands.createContract(host, argv.from, 0, contract.bytecode, next);
 	})
 	.then(function (data, next) {
 		contract.address = data;
 		console.log('new contract', contract.address);
-		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getMessage()', []) }, next);
+		commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getMessage()', []) }, next);
 	})
 	.then(function (data, next) {
 		console.log('value', contracts.decodeValue(data));
-		cmds.processTransaction(host, argv.from, contract.address, 0, { gas: 1000000, data: contracts.encodeCall(contract, 'setMessage(string)', [ 'Hello, world' ]) }, next);
+		commands.processTransaction(host, argv.from, contract.address, 0, { gas: 1000000, data: contracts.encodeCall(contract, 'setMessage(string)', [ 'Hello, world' ]) }, next);
 	})
 	.then(function (data, next) {
-		cmds.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getMessage()', []) }, next);
+		commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getMessage()', []) }, next);
 	})
 	.then(function (data, next) {
 		console.log('value', contracts.decodeValue(data));
