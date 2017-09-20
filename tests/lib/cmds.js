@@ -142,10 +142,12 @@ function getBalance(host, address, cb) {
 
 module.exports = {
 	createAccount: createAccount,
-	createContract: createContract,
+	getBalance: getBalance,
+	
 	processTransaction: processTransaction,
 	callTransaction: callTransaction,
-	getBalance: getBalance
+	
+	createContract: createContract
 };
 
 

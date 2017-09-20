@@ -1,8 +1,10 @@
 
 var rskapi = require('rskapi');
-var cmds = require('./lib/cmds');
 var sargs = require('simpleargs');
 var async = require('simpleasync');
+
+var cmds = require('./lib/cmds');
+var utils = require('./lib/utils');
 
 sargs
 	.define('h', 'host', 'http://localhost:4444', 'Host JSON RPC entry point')
@@ -13,22 +15,8 @@ var argv = sargs(process.argv.slice(2));
 
 var host = rskapi.host(argv.host);
 
-function sendTransactions(counter, cb) {
-	if (counter <= 0)
-		return cb(null, null);
-		
-	async()
-		.exec(function (next) {
-			cmds.processTransaction(host, argv.from, target, 100000, next);
-		})
-		.then(function (data, next) {
-			setTimeout(function () {
-				sendTransactions(counter - 1, cb);
-			}, 0);
-		})
-		.error(function(err) {
-			cb(err);
-		});
+function sendTransaction(cb) {
+	cmds.processTransaction(host, argv.from, target, 100000, cb);
 }
 
 var target;
@@ -40,7 +28,7 @@ async()
 	.then(function (data, next) {
 		target = data;
 		console.log('new account', target);
-		sendTransactions(argv.count, next);
+		utils.repeat(sendTransaction, argv.count, next);
 	})
 	.then(function (data, next) {
 		cmds.getBalance(host, target, next);
