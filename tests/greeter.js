@@ -5,6 +5,7 @@ var async = require('simpleasync');
 
 var contracts = require('./lib/contracts');
 var commands = require('./lib/commands');
+var utils = require('./lib/utils');
 
 var contract = contracts.compile('greeter.sol:greeter', 'greeter.sol');
 
@@ -26,14 +27,14 @@ async()
 		commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getMessage()', []) }, next);
 	})
 	.then(function (data, next) {
-		console.log('value', contracts.decodeValue(data));
+		console.log('value', utils.decodeValue(data));
 		commands.processTransaction(host, argv.from, contract.address, 0, { gas: 1000000, data: contracts.encodeCall(contract, 'setMessage(string)', [ 'Hello, world' ]) }, next);
 	})
 	.then(function (data, next) {
 		commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getMessage()', []) }, next);
 	})
 	.then(function (data, next) {
-		console.log('value', contracts.decodeValue(data));
+		console.log('value', utils.decodeValue(data));
 	})
 	.error(function (err) {
 		console.log(err);

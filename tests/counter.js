@@ -5,6 +5,7 @@ var async = require('simpleasync');
 
 var contracts = require('./lib/contracts');
 var commands = require('./lib/commands');
+var utils = require('./lib/utils');
 
 var contract = contracts.compile('counter.sol:counter', 'counter.sol');
 
@@ -26,21 +27,21 @@ async()
 		commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getValue()', []) }, next);
 	})
 	.then(function (data, next) {
-		console.log('value', contracts.decodeValue(data));
+		console.log('value', utils.decodeValue(data));
 		commands.processTransaction(host, argv.from, contract.address, 0, { gas: 2000000, data: contracts.encodeCall(contract, 'increment()', []) }, next);
 	})
 	.then(function (data, next) {
 		commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getValue()', []) }, next);
 	})
 	.then(function (data, next) {
-		console.log('value', contracts.decodeValue(data));
+		console.log('value', utils.decodeValue(data));
 		commands.processTransaction(host, argv.from, contract.address, 0, { gas: 2000000, data: contracts.encodeCall(contract, 'add(uint256)', [ 10 ]) }, next);
 	})
 	.then(function (data, next) {
 		commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getValue()', []) }, next);
 	})
 	.then(function (data, next) {
-		console.log('value', contracts.decodeValue(data));
+		console.log('value', utils.decodeValue(data));
 	})
 	.error(function (err) {
 		console.log(err);
