@@ -62,7 +62,6 @@ function encodeArguments(args) {
 }
 
 function hexToString(hex) {
-	console.log('hex', hex);
 	var str = '';
 	
 	for (var k = 0; k < hex.length; k += 2)

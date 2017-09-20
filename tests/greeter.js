@@ -7,11 +7,13 @@ var contracts = require('./lib/contracts');
 var commands = require('./lib/commands');
 var utils = require('./lib/utils');
 
+var config = require('./config.json');
+
 var contract = contracts.compile('greeter.sol:greeter', 'greeter.sol');
 
 sargs
-	.define('h', 'host', 'http://localhost:4444', 'Host JSON RPC entry point')
-	.define('f', 'from', '0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826', 'Initial account');
+		.define('h', 'host', config.host, 'Host JSON RPC entry point')
+		.define('f', 'from', config.account, 'Initial account');
 
 var argv = sargs(process.argv.slice(2));
 

@@ -6,10 +6,12 @@ var async = require('simpleasync');
 var commands = require('./lib/commands');
 var utils = require('./lib/utils');
 
+var config = require('./config.json');
+
 sargs
-	.define('h', 'host', 'http://localhost:4444', 'Host JSON RPC entry point')
-	.define('f', 'from', '0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826', 'Initial account')
-	.define('c', 'count', 10, 'Transactions to send')
+	.define('h', 'host', config.host, 'Host JSON RPC entry point')
+	.define('f', 'from', config.account, 'Initial account')
+	.define('c', 'count', 10, 'Transactions to send');
 
 var argv = sargs(process.argv.slice(2));
 
