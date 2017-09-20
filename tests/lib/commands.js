@@ -137,7 +137,7 @@ function createAccount(host, cb) {
 }
 
 function unlockAccount(host, address, cb) {
-	host.unlockPersonalAccount(address, 'passphrase', '0x' + (60000).toString(16), cb);
+	host.unlockPersonalAccount(address, 'passphrase', 60000, cb);
 }
 
 function getBalance(host, address, cb) {
