@@ -136,12 +136,17 @@ function createAccount(host, cb) {
 	host.newPersonalAccount('passphrase', cb);
 }
 
+function unlockAccount(host, address, cb) {
+	host.unlockPersonalAccount(address, 'passphrase', '0x' + (60000).toString(16), cb);
+}
+
 function getBalance(host, address, cb) {
 	host.getBalance(address, cb);
 }
 
 module.exports = {
 	createAccount: createAccount,
+	unlockAccount: unlockAccount,
 	getBalance: getBalance,
 	
 	processTransaction: processTransaction,
