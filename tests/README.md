@@ -2,7 +2,7 @@
 
 ## Install
 
-Install Node.js
+Install [Node.js](https://nodejs.org/en/). The code was developed and tested using NodeJS 6.x.x.
 
 Execute
 ```
@@ -65,7 +65,6 @@ commands.createAccount(host, function (err, address) {
 The account is created in the target host. Its private key is saved into the node wallet.
 
 ### Unlock an account
-
 ```js
 commands.unlockAccount(host, address, function (err, data) { 
     if (err)
@@ -75,8 +74,19 @@ commands.unlockAccount(host, address, function (err, data) {
 
 The account is unlocked in the target host wallet. The unlock duration is 1 minute.
 
-### Send and mine a transaction
+### Get account balance
+```js
+commands.getBalance(host, address, function (err, balance) { 
+    if (err)
+        console.log('error', err);
+    else
+        console.log('account', address, 'balance', balance);
+}
+```
+The balance is returned as an hexadecimal string. If it is small enought, 
+it can be converted using `parseInt(balance, 16)`.
 
+### Send and mine a transaction
 ```js
 commands.processTransaction(host, from, to, value, [options,] function (err, hash) { 
     if (err)
@@ -85,6 +95,7 @@ commands.processTransaction(host, from, to, value, [options,] function (err, has
         console.log('transaction hash', hash);
 }
 ```
+
 The command sends value from a sender to a receiver, and wait for its mining. An error is returned if the
 send fails or if the transaction is not mined. If the command success, 
 the hash of the created transaction is returned.
@@ -92,7 +103,6 @@ the hash of the created transaction is returned.
 The arguments `from` and `to` are account addresses.
 
 Usually, the options objects has additional data, example:
-
 ```js
 {
     gas: 21000,
@@ -101,14 +111,66 @@ Usually, the options objects has additional data, example:
 }
 ```
 
+### Compile a Solidity program
+```js
+var contracts = require('./lib/contracts');
+
+contract = contracts.compile('greeter.sol:greeter', 'greeter.sol');
+```
+
+The first argument is the qualified contract name. The second argument is the filename where the source code resides.
+
+### Creating a contract instance
+
+After compiling the contract, its bytecodes could be send to the network:
+
+```js
+commands.createContract(host, from, 0, contract.bytecode, function (err, address) { ... });
+```
+
+The callback function receives the address of the created instance.
+
+### Invoking a contract method
+
+A transaction is send to the contract using the `processTransaction` function:
+```js
+commands.processTransaction(host, from, contractAddress, 0, {
+    gas: 1000000, 
+    data: contracts.encodeCall(contract, 
+        'setMessage(string)',   // function signature
+        [ 'Hello, world' ])  // and arguments
+}, next);
+```
+
+The `data` contains the encoded function signature and arguments. Currently, integers and string arguments
+are supported.
+
+If the function signature is unknown, it can be obtained using:
+
+```js
+contract = contracts.compile('greeter.sol:greeter', 'greeter.sol');
+
+console.dir(contract.functionHashes);
+```
+
+### Calling a contract method
+
+Instead of an online transaction, a call could be invoked:
+
+```js
+commands.callTransaction(host, fromfrom, contractAddress, 0, { data: 
+    contracts.encodeCall(contract, 'getMessage()', []) }, 
+    next);
+```
+
+A call cannot alter the contract storage.
+
 ## Chaining of commands
 
 In the samples, the command callbacks are chaining using an asynchronous simple module.
 
 Example:
-
 ```js
-
 async()
     .exec(function (next) {
         commands.createAccount(host, next);
@@ -134,6 +196,22 @@ async()
     });
 ```
 
+## Samples
+
+### Send n transactions
+
+Execute
+```
+node sendtxs
+```
+
+It creates a new account, and sends ten transactions from `config.account` to the newly created account.
+
+Specifying the number of transactions:
+```
+node sendtxs --count 100
+```
+
 ## To do
 
 These commands could be refactored to:
@@ -141,5 +219,5 @@ These commands could be refactored to:
 - Use node.js 8.x util.promisify (to convert the functions that use callbacks to return promises)
 - Use async/await to call them
 
-Now, there is no support for sending a raw transaction.
+Currently, there is no support for sending a raw transaction.
 
