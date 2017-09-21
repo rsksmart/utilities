@@ -14,8 +14,8 @@ npm instal
 Edit the file `config.json`. Current values:
 ```json
 {
-	"account": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
-	"host": "http://localhost:4444"
+    "account": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
+    "host": "http://localhost:4444"
 }
 ```
 
@@ -55,10 +55,10 @@ Each command is a function with a callback as the last argument.
 
 ```js
 commands.createAccount(host, function (err, address) { 
-	if (err)
-		console.log('error', err);
-	else
-		console.log('new account address', address);
+    if (err)
+        console.log('error', err);
+    else
+        console.log('new account address', address);
 }
 ```
 
@@ -68,8 +68,8 @@ The account is created in the target host. Its private key is saved into the nod
 
 ```js
 commands.unlockAccount(host, address, function (err, data) { 
-	if (err)
-		console.log('error', err);
+    if (err)
+        console.log('error', err);
 }
 ```
 
@@ -79,10 +79,10 @@ The account is unlocked in the target host wallet. The unlock duration is 1 minu
 
 ```js
 commands.processTransaction(host, from, to, value, [options,] function (err, hash) { 
-	if (err)
-		console.log('error', err);
-	else
-		console.log('transaction hash', hash);
+    if (err)
+        console.log('error', err);
+    else
+        console.log('transaction hash', hash);
 }
 ```
 The command sends value from a sender to a receiver, and wait for its mining. An error is returned if the
@@ -95,9 +95,9 @@ Usually, the options objects has additional data, example:
 
 ```js
 {
-	gas: 21000,
-	gasPrice: 1,
-	data: '0x .... '
+    gas: 21000,
+    gasPrice: 1,
+    data: '0x .... '
 }
 ```
 
@@ -110,28 +110,28 @@ Example:
 ```js
 
 async()
-	.exec(function (next) {
-		commands.createAccount(host, next);
-	})
-	.then(function (data, next) {
-		account1 = data;
-		console.log('new account', account1);
-		commands.createAccount(host, next);
-	})
-	.then(function (data, next) {
-		account2 = data;
-		console.log('new account', account2);
-		commands.processTransaction(host, argv.from, account1, 100000, next);
-	})
-	.then(function (data, next) {
-		commands.getBalance(host, account1, next);
-	})
-	.then(function (data, next) {
-		console.log('account balance', account1, parseInt(data, 16));
-	})
-	.error(function (err) {
-		console.log(err);
-	});
+    .exec(function (next) {
+        commands.createAccount(host, next);
+    })
+    .then(function (data, next) {
+        account1 = data;
+        console.log('new account', account1);
+        commands.createAccount(host, next);
+    })
+    .then(function (data, next) {
+        account2 = data;
+        console.log('new account', account2);
+        commands.processTransaction(host, argv.from, account1, 100000, next);
+    })
+    .then(function (data, next) {
+        commands.getBalance(host, account1, next);
+    })
+    .then(function (data, next) {
+        console.log('account balance', account1, parseInt(data, 16));
+    })
+    .error(function (err) {
+        console.log(err);
+    });
 ```
 
 ## To do
