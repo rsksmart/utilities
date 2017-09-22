@@ -44,6 +44,19 @@ function encodeStringArgument(arg, ending) {
 	return result;
 }
 
+function encodeStringValue(arg) {
+	return encodeIntegerArgument(arg.length) + fillTo64(stringToHex(arg));
+	
+	return result;
+}
+
+function encodeValue(arg) {
+    if (typeof arg === 'string')
+        return encodeStringValue(arg);
+    else
+        return encodeIntegerArgument(arg);
+}
+
 function encodeArguments(args) {
 	var result = '';
 	var varresult = '';
@@ -116,6 +129,8 @@ module.exports = {
 	
 	encodeArguments: encodeArguments,
 
+    encodeValue: encodeValue,
+    
 	decodeValue: decodeValue,
 	decodeValues: decodeValues
 }
