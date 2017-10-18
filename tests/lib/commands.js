@@ -151,6 +151,7 @@ module.exports = {
     
     processTransaction: processTransaction,
     callTransaction: callTransaction,
+    sendTransaction: sendTransaction,
     
     createContract: createContract
 };
