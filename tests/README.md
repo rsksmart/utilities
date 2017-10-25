@@ -23,11 +23,9 @@ The above configuration can be used with a local node, running in `regtest`.
 
 ## Sample programs
 
-### Counter Stressing
+### Samples Configuration
 
-It compiles a contract, deploy a instance to a node, and invokes a transaction incrementing a counter.
-
-Configure `config.json`:
+The samples shares a common `config.json`:
 
 ```js
 {
@@ -36,9 +34,14 @@ Configure `config.json`:
 }
 ```
 
-The account address should have enough balance and the node should sign transactions.
+The account address should have enough balance and the node should sign transactions. Internally, the library
+is using `eth_sendTransaction`.
 
-Then, invoke the program:
+### Counter Stressing
+
+It compiles a contract, deploy a instance to a node, and invokes a transaction incrementing a counter.
+
+Run:
 
 ```js
 node [-h|--host <hostaddress>] [-c|--count <count>] [-f|--from <accountaddress>]
@@ -67,6 +70,35 @@ value 21
 transaction 0x5c178059e0662b143bd7ab9a96732f28bd95f10c8fe0968a5fed1c9b8066e7af
 transaction mined in block 1548
 ....
+```
+
+### Process n transactions
+
+Execute
+```
+node processtxs
+```
+
+It creates a new account, and sends ten transactions from `config.account` to the newly created account.
+
+Specifying the number of transactions:
+```
+node processtxs --count 100
+```
+
+### Send n transactions without waiting for mining
+
+Execute
+```
+node sendtxs
+```
+
+It creates a new account, and sends ten transactions from `config.account` to the newly created account,
+without waiting for their mining.
+
+Specifying the number of transactions:
+```
+node sendtxs --count 100
 ```
 
 ## Library Usage
@@ -243,35 +275,6 @@ async()
 ```
 
 ## More Samples
-
-### Send n transactions
-
-Execute
-```
-node sendtxs
-```
-
-It creates a new account, and sends ten transactions from `config.account` to the newly created account.
-
-Specifying the number of transactions:
-```
-node sendtxs --count 100
-```
-
-### Send n transactions without waiting for mining
-
-Execute
-```
-node sendtx2
-```
-
-It creates a new account, and sends ten transactions from `config.account` to the newly created account,
-without waiting for their mining.
-
-Specifying the number of transactions:
-```
-node sendtx2 --count 100
-```
 
 ## To do
 
