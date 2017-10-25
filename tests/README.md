@@ -71,7 +71,7 @@ transaction 0x5c178059e0662b143bd7ab9a96732f28bd95f10c8fe0968a5fed1c9b8066e7af
 transaction mined in block 1548
 ....
 ```
-
+	
 ### Process n transactions
 
 Execute
@@ -273,8 +273,6 @@ async()
         console.log(err);
     });
 ```
-
-## More Samples
 
 ## To do
 
