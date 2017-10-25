@@ -21,13 +21,63 @@ Edit the file `config.json`. Current values:
 
 The above configuration can be used with a local node, running in `regtest`.
 
-## Usage
+## Sample programs
+
+### Counter Stressing
+
+It compiles a contract, deploy a instance to a node, and invokes a transaction incrementing a counter.
+
+Configure `config.json`:
+
+```js
+{
+    "account": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
+    "host": "http://localhost:4444"
+}
+```
+
+The account address should have enough balance and the node should sign transactions.
+
+Then, invoke the program:
+
+```js
+node [-h|--host <hostaddress>] [-c|--count <count>] [-f|--from <accountaddress>]
+```
+
+where:
+
+- `-h`, `--host`: the host address (RPC entry point) to use. Default `config.host`.
+- `-f`, `--from`: the account that creates the contract and invoke the method. Default `config.account`.
+- `-c`, `--count`: number of transactions to send to contract method. Default `10`.
+
+Expected output:
+```
+compiling contract counter.sol:counter
+transaction 0x6e620af32eb8dc89bd77ae62200a0644ca44f14e9329712c3e03f2a2d8827069
+contract mined in block 1543
+contract address 0x99c4143e471d28df187a817940ed8cd8cc82c504
+new contract 0x99c4143e471d28df187a817940ed8cd8cc82c504
+value 1
+transaction 0xfbe7b4f011a9e9aa51221e3913fecc6335c699f697af91fc34fb4c5d5cd0a2b6
+transaction mined in block 1545
+value 11
+transaction 0x459b385cb50f6e255d547273fe0b4d0efbc9694a9fe8c15416e22adc761740d1
+transaction mined in block 1546
+value 21
+transaction 0x5c178059e0662b143bd7ab9a96732f28bd95f10c8fe0968a5fed1c9b8066e7af
+transaction mined in block 1548
+....
+```
+
+## Library Usage
+
+In your program:
 ```js
 var contracts = require('./lib/contracts');
 var commands = require('./lib/commands');
 ```
 
-## Setting the target host
+### Setting the target host
 
 To create a host variable referencing the target RSK node:
 ```js
@@ -46,10 +96,6 @@ var host = rskapi.host(config.host);
 ```
 
 The protocol, host address and port should be specified.
-
-## Commands
-
-Each command is a function with a callback as the last argument. 
 
 ### Create an account
 
@@ -165,7 +211,7 @@ commands.callTransaction(host, fromfrom, contractAddress, 0, { data:
 
 A call cannot alter the contract storage.
 
-## Chaining of commands
+### Chaining of commands
 
 In the samples, the command callbacks are chaining using an asynchronous simple module.
 
@@ -196,7 +242,7 @@ async()
     });
 ```
 
-## Samples
+## More Samples
 
 ### Send n transactions
 
@@ -212,12 +258,29 @@ Specifying the number of transactions:
 node sendtxs --count 100
 ```
 
+### Send n transactions without waiting for mining
+
+Execute
+```
+node sendtx2
+```
+
+It creates a new account, and sends ten transactions from `config.account` to the newly created account,
+without waiting for their mining.
+
+Specifying the number of transactions:
+```
+node sendtx2 --count 100
+```
+
 ## To do
 
 These commands could be refactored to:
 
 - Use node.js 8.x util.promisify (to convert the functions that use callbacks to return promises)
 - Use async/await to call them
+
+Current implementation is simple, and the uses cases didn't need those refactors, yet.
 
 Currently, there is no support for sending a raw transaction.
 
