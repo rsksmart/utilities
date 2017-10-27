@@ -22,6 +22,9 @@ var host = rskapi.host(argv.host);
 
 function invokeCounter(cb) {
     async().exec(function (next) {
+        commands.unlockAccount(host, argv.from, next);
+    })
+    .then(function (data, next) {
         commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'getValue()', []) }, next);
     })
     .then(function (data, next) {
@@ -32,6 +35,9 @@ function invokeCounter(cb) {
 
 async()
     .exec(function (next) {
+        commands.unlockAccount(host, argv.from, next);
+    })
+    .then(function (data, next) {
         commands.createContract(host, argv.from, 0, contract.bytecode, next);
     })
     .then(function (data, next) {
