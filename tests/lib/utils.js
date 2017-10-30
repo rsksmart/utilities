@@ -32,6 +32,16 @@ function stringToHex(str) {
 	return hex;
 }
 
+function encodeHexaValue(arg) {
+	if (arg.startsWith('0x'))
+		arg = arg.substring(2);
+	
+	while (arg.length < 64)
+		arg = '0' + arg;
+	
+	return arg;
+}
+
 function encodeStringArgument(arg, ending) {
 	var result = [];
 	
@@ -52,7 +62,10 @@ function encodeStringValue(arg) {
 
 function encodeValue(arg) {
     if (typeof arg === 'string')
-        return encodeStringValue(arg);
+		if (arg.startsWith('0x'))
+			return encodeHexaValue(arg);
+		else
+			return encodeStringValue(arg);
     else
         return encodeIntegerArgument(arg);
 }
@@ -63,9 +76,13 @@ function encodeArguments(args) {
 	
 	args.forEach(function (arg) {
 		if (typeof arg === 'string') {
-			var encoded = encodeStringArgument(arg, args.length * 32 + varresult.length / 2);
-			result += encoded[0];
-			varresult += encoded[1];
+			if (arg.startsWith('0x'))
+				result += encodeHexaValue(arg);
+			else {
+				var encoded = encodeStringArgument(arg, args.length * 32 + varresult.length / 2);
+				result += encoded[0];
+				varresult += encoded[1];
+			}
 		}
 		else
 			result += encodeIntegerArgument(arg);
@@ -104,11 +121,11 @@ function decodeValues(encoded) {
 	var values = [];
 	
 	while (encoded.length >= 64) {
-		args.push(decodeValue(encoded.substring(0, 64)));
+		values.push(decodeValue(encoded.substring(0, 64)));
 		encoded = encoded.substring(64);
 	}
 	
-	return value;
+	return values;
 }
 
 function encodeIntegerArgument(arg) {

@@ -72,6 +72,19 @@ transaction mined in block 1548
 ....
 ```
 	
+### Token stressing
+
+Execute
+```
+node tokenstressing
+```
+
+It creates a new token contract, and start to call an internal transfer n times. The count can be
+specified using an argument:
+```
+node tokenstressing --count 100
+```
+
 ### Process n transactions
 
 Execute
