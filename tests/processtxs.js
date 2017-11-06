@@ -18,7 +18,14 @@ var argv = sargs(process.argv.slice(2));
 var host = rskapi.host(argv.host);
 
 function sendTransaction(cb) {
-    commands.processTransaction(host, argv.from, target, 100000, cb);
+	async()
+	.exec(function (next) {
+		commands.unlockAccount(host, argv.from, next);
+	})
+	.then(function (data, next) {
+		console.log('processing tx');
+		commands.processTransaction(host, argv.from, target, 100000, cb);
+	});
 }
 
 var target;

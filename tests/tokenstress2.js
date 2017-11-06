@@ -37,18 +37,7 @@ function invokeTransfer(cb) {
         commands.unlockAccount(host, argv.from, next);
     })
     .then(function (data, next) {
-        commands.processTransaction(host, argv.from, contract.address, 0, { gas: 1000000, data: contracts.encodeCall(contract, 'transfer(address,uint256)', [ address, 1 ]) }, next);
-    })
-    .then(function (data, next) {
-        commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'balances(address)', [ address ]) }, next);
-    })
-    .then(function (data, next) {
-        console.log('value', utils.decodeValue(data));
-        commands.callTransaction(host, argv.from, contract.address, 0, { data: contracts.encodeCall(contract, 'balances(address)', [ argv.from ]) }, next);
-    })
-    .then(function (data, next) {
-        console.log('value', utils.decodeValue(data));
-		cb(null, null);
+        commands.sendTransaction(host, argv.from, contract.address, 0, { gas: 1000000, data: contracts.encodeCall(contract, 'transfer(address,uint256)', [ address, 1 ]) }, cb);
     })
 	.error(cb);
 }
