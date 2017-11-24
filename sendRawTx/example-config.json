@@ -1,0 +1,8 @@
+{
+    "rskNode": "NODE-ADDRESS:PORT",
+    "senderAddress": "SENDER-ADDRESS",
+    "privateKey": "SENDER-PRIVATE-KEY",
+    "valueToSend": "VALUE-TO-SEND-IN-HEX-STARTING-WITH-Ox",
+    "gas": "GAS-IN-HEX-STARTING-WITH-0x",
+    "account": "RECEIVE-ACCOUNT-ADDRESS"
+}

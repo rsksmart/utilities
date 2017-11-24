@@ -1,0 +1,15 @@
+{
+  "name": "sendRawTx",
+  "private": true,
+  "version": "1.0.0",
+  "description": "sendRawTx",
+  "main": "sendRawTx.js",
+  "scripts": {
+  },
+  "author": "Bernardo Codesido",
+  "license": "MIT",
+  "dependencies": {
+    "web3": "^0.15.3",
+    "ethereumjs-tx": "latest"
+  }
+}
