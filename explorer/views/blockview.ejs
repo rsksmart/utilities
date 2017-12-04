@@ -4,7 +4,7 @@
 
 <div class="row actions">
 <a class="btn btn-info" href="/block">Blocks</a>
-<% if (block.parentHash) { %>
+<% if (block && block.parentHash) { %>
 <a class="btn btn-info" href="/block/<%= block.parentHash %>">Parent</a>
 <% } %>
 </div>
