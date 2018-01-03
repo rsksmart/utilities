@@ -143,6 +143,34 @@ function initializeWeb3(){
         })]
     });
 
+	web3._extend({
+        property: 'evm',
+        methods: [new web3._extend.Method({
+            name: 'fallbackMine',
+            call: 'evm_fallbackMine',
+            params: 0
+        })]
+    });
+
+	
+	web3._extend({
+        property: 'evm',
+        methods: [new web3._extend.Method({
+            name: 'startMining',
+            call: 'evm_startMining',
+            params: 0
+        })]
+    });
+
+	web3._extend({
+        property: 'evm',
+        methods: [new web3._extend.Method({
+            name: 'stopMining',
+            call: 'evm_stopMining',
+            params: 0
+        })]
+    });
+	
     web3._extend({
         property: 'evm',
         methods: [new web3._extend.Method({
