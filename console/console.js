@@ -10,7 +10,7 @@ if (typeof window !== 'undefined' && typeof window.Web3 === 'undefined') {
     window.Web3 = web3;
 }
 
-var server = "localhost:4444";
+var server = "http://localhost:4444";
 var file = "";
 
 getInputParamsFromCommandLineIfAny();
@@ -99,7 +99,7 @@ function getInputParamsFromCommandLineIfAny(){
 
 function initializeWeb3(){
 	web3 = new Web3();
-	web3.setProvider(new web3.providers.HttpProvider('http://' + server));
+	web3.setProvider(new web3.providers.HttpProvider(server));
 	
 	web3._extend({
         property: 'evm',
