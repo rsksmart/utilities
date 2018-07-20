@@ -82,13 +82,17 @@ function getInputParamsFromCommandLineIfAny(){
 				printHelp();		
 				process.exit(0);
 			case '-server':
-				if (process.argv[i + 1] == null)
+				const server_arg = process.argv[i + 1];
+				if (server_arg == null)
 				{
 					console.log('Please specify server address to use. Example: node console -server www.remote.com:8888.');
 					console.log('If port is not specified connection will try port 80.');
 					process.exit(0);
 				}
-				server = process.argv[i + 1];
+				else if(server_arg.length > 8 && server_arg.substr(0,8) == 'https://')
+					server = server_arg;
+				else
+					server = 'http://' + server_arg;
 				break;
 			default: 
 				console.log('Invalid option. Please type "node console -help" for help.');
@@ -166,6 +170,6 @@ function printHelp(){
 	console.log("-----------------   \n");
 	console.log("usage: node console [-file script-filename] [-server address]   \n");
 	console.log("-file: script to use as input. Executes that file and exit console. ");
-	console.log("-server: specified RSK RPC JSON server to connect to. Default is localhost:4444 ");
+	console.log("-server: specified RSK RPC JSON server to connect to. Default is http://localhost:4444 ");
 	console.log("\n");
 }

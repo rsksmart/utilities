@@ -8,7 +8,7 @@ From the command line, execute `npm install` to install dependencies.
 
 ## Run
 
-To run RSK console in the default host `https://localhost:4444` execute:
+To run RSK console in the default host `http://localhost:4444` execute:
 
 ```shell
 node console.js
@@ -20,10 +20,16 @@ To run RSK console in an specified host execute
 node console.js -server HOST:PORT
 ```
 
-For example:
+To connect via _http_ is not necessary to specify the protocol. Run:
 
 ```shell
-node console.js -server "https://public-node.rsk.co:443"
+node console.js -server "mynode.com"
+```
+
+To connect via _https_ is necessary to specify the protocol. Run:
+
+```shell
+node console.js -server "https://public-node.rsk.co"
 ```
 
 If everything works as expected, the RSK command prompt will be displayed.
