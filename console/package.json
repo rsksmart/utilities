@@ -5,16 +5,14 @@
   "description": "RSK node rpc tests",
   "main": "console.js",
   "scripts": {
-    "test": "simpleunit test"
+    "test": "mocha"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "simpleargs": "0.0.2",
-    "simpledsl": "0.0.3",
     "web3": "^0.15.3"
   },
   "devDependencies": {
-    "simpleunit": "0.0.7"
+    "mocha": "5.2.0"
   }
 }

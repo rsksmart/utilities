@@ -2,6 +2,7 @@
 
 var Web3 = require('web3');
 var readline = require('readline');
+var util = require('./util.js')
 fs = require('fs')
 
 
@@ -82,19 +83,13 @@ function getInputParamsFromCommandLineIfAny(){
 				printHelp();		
 				process.exit(0);
 			case '-server':
-				const server_arg = process.argv[i + 1];
-				if (server_arg == null)
+				if (!process.argv[i + 1])
 				{
 					console.log('Please specify server address to use. Example: node console -server www.remote.com:8888.');
 					console.log('If port is not specified connection will try port 80.');
 					process.exit(0);
 				}
-				else if(server_arg.length > 8 && server_arg.substr(0,8) == 'https://')
-					server = server_arg;
-				else if(server_arg.length > 7 && server_arg.substr(0,7) == 'http://')
-					server = server_arg;
-				else
-					server = 'http://' + server_arg;
+				else server = util.deriveServer(process.argv[i + 1])
 				break;
 			default: 
 				console.log('Invalid option. Please type "node console -help" for help.');

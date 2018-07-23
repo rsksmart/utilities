@@ -32,6 +32,11 @@ To connect via _https_ is necessary to specify the protocol. Run:
 node console.js -server "https://public-node.rsk.co"
 ```
 
+Default port is 4444. To connect to any other port you must specify it. For example:
+```shell
+node console.js -server "https://public-node.rsk.co:443"
+```
+
 If everything works as expected, the RSK command prompt will be displayed.
 
 ## Interact
