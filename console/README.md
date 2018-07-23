@@ -39,6 +39,11 @@ node console.js -server "https://public-node.rsk.co:443"
 
 If everything works as expected, the RSK command prompt will be displayed.
 
+## Test
+```shell
+npm test
+```
+
 ## Interact
 
 There are several commands to interact with the node. These are a couple of examples:
