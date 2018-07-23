@@ -91,6 +91,8 @@ function getInputParamsFromCommandLineIfAny(){
 				}
 				else if(server_arg.length > 8 && server_arg.substr(0,8) == 'https://')
 					server = server_arg;
+				else if(server_arg.length > 7 && server_arg.substr(0,7) == 'http://')
+					server = server_arg;
 				else
 					server = 'http://' + server_arg;
 				break;
