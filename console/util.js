@@ -13,7 +13,6 @@ function deriveServer (s) {
       else result += ':443'
     }
   }
-  console.log('Connected to ' + result)
   return result
 }
 

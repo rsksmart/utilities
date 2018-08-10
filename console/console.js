@@ -15,7 +15,10 @@ var server = "http://localhost:4444";
 var file = "";
 
 getInputParamsFromCommandLineIfAny();
+
 initializeWeb3();
+
+console.log('Connected to ' + server)
 
 if (file == ""){
 	startConsole();
