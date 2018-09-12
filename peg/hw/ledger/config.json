@@ -1,0 +1,9 @@
+{
+  "rskNode": "https://public-node.testnet.rsk.co",
+  "valueToSend": "0x16345785D8A0000",
+  "gas": "0xABE0",
+  "account": "0x0000000000000000000000000000000001000006",
+  "data": "",
+  "chainId": 31, 
+  "derivationPath": "44'/1'/0'/0/0"  
+}
