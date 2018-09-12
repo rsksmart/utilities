@@ -1,0 +1,9 @@
+{
+  "isTestnet" : true,
+  "BTCHost" : "localhost",
+  "BTCPort" : "18332",
+  "BTCUser" : "rsk",
+  "BTCPass" : "rsk",
+  "BTCFee" : "0.001",
+  "BTCTxVersion" : "1" 
+}

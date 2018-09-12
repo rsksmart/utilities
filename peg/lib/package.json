@@ -1,0 +1,23 @@
+{
+  "name": "proxy-wallet-lib",
+  "version": "1.0.0",
+  "description": "RSK Proxy Wallet - Peg process LIB",
+  "main": "lib.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "RSK Ecosystem",
+  "license": "MIT",
+  "dependencies": {
+    "argh": "0.1.4",
+    "bitcoin": "latest",
+    "bitcoinjs-lib": "3.3.2",
+    "mocha": "5.2.0",
+    "tiny-secp256k1": "0.1.0",
+    "typeforce": "1.11.3",
+    "ethereumjs-util": "5.2.0",
+    "wif": "2.0.1",
+    "bs58": "3.0.0"
+  },
+  "devDependencies": {}
+}
