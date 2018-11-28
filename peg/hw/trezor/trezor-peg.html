@@ -119,12 +119,12 @@
 <script src="js/web3.js"></script>
 
 <script>
-  var derivationPath = "m/44'/1'/0'/0'/0";
-  var coin = "TEST"; // "btc"
-  var rskNode = "https://public-node.testnet.rsk.co";
+  var derivationPath = "m/44'/1'/0'/0'/0"; // MAINNET value: "m/44'/0'/0'/0'/0"
+  var coin = "TEST"; // MAINNET value: "btc"
+  var rskNode = "https://public-node.testnet.rsk.co"; // MAINNET value: "https://public-node.rsk.co"
   var bridgeRskAddress = "0x0000000000000000000000000000000001000006";  
   var gas = "0xABE0";
-  var chainId = 31;
+  var chainId = 31; // MAINNET value: 30
 
   function getBtcAddress(){
       TrezorConnect.getAddress({
@@ -149,7 +149,7 @@
   function getFederationAddress(){
       getWeb3();
       var bridgeAbi = '[{ "name": "getFederationAddress", "type": "function", "constant": true, "inputs": [], "outputs": [{ "name": "", "type": "string" }] }]'
-      var bridgeAddress = "0x0000000000000000000000000000000001000006"
+      var bridgeAddress = bridgeRskAddress;
       var bridgeContract = web3.eth.contract(JSON.parse(bridgeAbi)).at(bridgeAddress);
       var res = bridgeContract.getFederationAddress();
       $("#alert-fed-address").show();
