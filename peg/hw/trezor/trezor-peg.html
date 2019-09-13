@@ -126,6 +126,11 @@
   var gas = "0xABE0";
   var chainId = 31; // MAINNET value: 30
 
+  TrezorConnect.manifest({
+    email: 'mail@mail.com',
+    appUrl: 'http://localhost'
+  });
+
   function getBtcAddress(){
       TrezorConnect.getAddress({
             path: derivationPath,
@@ -142,7 +147,7 @@
           path: derivationPath
       }).then(function(result) {
           $("#alert-rsk-address").show();
-          document.getElementById("rskAddress").innerHTML = 'RSK Address: ' + result.payload.address.toLowerCase();            
+          document.getElementById("rskAddress").innerHTML = 'RSK Address: ' + result.payload.address.toLowerCase();
       });
   }
 
