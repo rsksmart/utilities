@@ -22,3 +22,11 @@ web3.eth.getBalance(<ACCOUNT ADDRESS>): returns the account balance
 
 For more information about Web3 check the [documentation](https://github.com/ethereum/wiki/wiki/JavaScript-API) 
 
+## Docker
+
+To build docker image, execute `docker build -t rsk-console .`
+This image now can be run similary to the script:
+```
+docker run -it --rm rsk-console -server HOST:PORT
+```
+
