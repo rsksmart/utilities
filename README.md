@@ -1,9 +1,11 @@
+ > This repo was deprecated, follow the links below for utilities. 
+
 # RSK Utilities
-This project contains tools that we find useful in the usage of an RSK node
 
-* Console: simple but useful console that enables interacting with an RSK node through web3js.
+* Developer Portal: [https://developers.rsk.co](https://developers.rsk.co)
 
-* Explorer: sample RSK Blockchain Explorer, includes a simple asset creation feature.
+* RSK3.js: [https://github.com/rsksmart/rsk3.js](https://github.com/rsksmart/rsk3.js)
 
-* Rpc-tests: RPC tests for RSK node.
+* Explorer: [https://github.com/rsksmart/rsk-explorer](https://github.com/rsksmart/rsk-explorer)
 
+* Rpc-tests: [https://github.com/rsksmart/json-rpc-web3js](https://github.com/rsksmart/json-rpc-web3js)
